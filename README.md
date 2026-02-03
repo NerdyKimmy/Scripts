@@ -8,7 +8,7 @@ A collection of lightweight, portable, and efficient scripts designed for daily 
 
 ## 🛠 Tech Stack
 
-* **Shell:** `dash` (POSIX compliant), `sh`, Bash.
+* **Shell:** `dash` (POSIX compliant), `sh`, yash, bash.
 * **Python:** 3.x (with `requests` for API integration).
 * **IPC & Synchronization:** Named pipes (FIFOs), signal trapping, and subshell concurrency.
 * **System Integration:** `dbus-send` (for power management), `pactl` (event-based audio monitoring), `xsetroot`.
@@ -23,9 +23,9 @@ A collection of lightweight, portable, and efficient scripts designed for daily 
 | **`bar.sh`** | `dash` | Asynchronous DWM status bar manager. | **FIFO Architecture:** Uses a named pipe in `/tmp/` to aggregate data from parallel background processes. |
 | **`weather.py`** | Python | Weather fetcher via OpenWeatherMap API. | **Smart Caching:** Implements a local JSON cache (`~/.cache/`) with a 600s TTL to prevent redundant API calls. |
 | **`blue.sh`** | `sh` | Bluetooth device monitoring. | Real-time event parsing using `btmon` and `awk` filters. |
-| **`powermenu.sh`**| `sh` | Power management menu. | Interacts with system buses via `dbus-send` for Shutdown/Reboot actions. |
-| **`lock.sh`** | `sh` | Screen locker utility. | Handles secure session state before invoking the locker. |
-| **`waldwm.sh`** | `sh` | Wallpaper & Theme manager. | Updates WM colors and backgrounds dynamically. |
+| **`powermenu.sh`**| `sh` | Power management menu. | Interacts with system buses via ConsoleKit `dbus-send` for Shutdown/Reboot actions. |
+| **`lock.sh`** | `sh` | Screen locker utility. | Handles secure session state before invoking the locker, using xautolock and pactl to detect sound server activity and prevent locking. |
+| **`waldwm.sh`** | `sh` | Wallpaper & Theme manager. | Updates DWM colors by symlinks and recompiles dynamically. |
 
 ---
 
