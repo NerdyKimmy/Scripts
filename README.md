@@ -49,10 +49,10 @@ To ensure a responsive UI and respect API limits:
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+    git clone https://github.com/NerdyKimmy/Scripts
     ```
 2.  **Dependencies:**
-    * **Linux/BSD:** `dash`, `pactl`, `playerctl`, `xset`, `xsetroot`.
+    * **Linux/BSD:** `dash`, `pactl`, `playerctl`, `xset`, `xsetroot`, `playerctl`, `dunst`, `dbus`.
     * **Python:** `pip install requests`.
 3.  **Usage:**
     Add the scripts to your `$PATH` or call them directly. For the status bar:
