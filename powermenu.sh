@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/usr/bin/bash
 
 export LANG=C.UTF-8
 export LC_ALL=C.UTF-8
@@ -14,17 +14,15 @@ choice=$(printf "zzz\nreboot\nshutdown" | menu -l 4 )
 
 case "$choice" in
     zzz)
-    	${HOME}/.local/share/scripts/lock.sh &
-	sleep 1 &
+    ${HOME}/.local/share/scripts/lockf.sh &
+	sleep 1 
 	doas /usr/bin/zzz 
         ;;
     reboot)
-        dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit" \
-            /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart
+    doas /sbin/reboot
         ;;
     shutdown)
-        dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit" \
-            /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop
+    doas /sbin/poweroff
         ;;
     *)
         exit 0

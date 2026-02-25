@@ -1,4 +1,4 @@
-#!/bin/yash
+#!/bin/bash
 
 DWM_DIR="$HOME/dwm"
 ST_DIR="$HOME/st"

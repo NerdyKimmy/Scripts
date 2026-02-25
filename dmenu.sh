@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/usr/bin/bash
 
 export LANG=C.UTF-8
 export LC_ALL=C.UTF-8
@@ -8,7 +8,7 @@ export LC_ALL=C.UTF-8
 
 FONT="JetBrainsMono Nerd Font:size=12"
 COLORS="-nb $color0 -nf $color7 -sb $color2 -sf $color0"
-APP_DIR="${HOME}/.local/share/applications"
+APP_DIR="${HOME}/.local/share/applications/selected"
 
 # Styled menu function
 menu() {
