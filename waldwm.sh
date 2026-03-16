@@ -12,3 +12,5 @@ cd "$ST_DIR" && make clean install
 pkill bar.sh
 pkill dunst
 pkill dwm
+
+xrdb -merge ~/.Xresources

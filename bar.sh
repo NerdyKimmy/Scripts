@@ -13,6 +13,9 @@ pkill -f "pactl subscribe" 2>/dev/null
 pkill -f "playerctl status" 2>/dev/null
 
 
+# --- 1. МИТТЄВА РОЗКЛАДКА (Fast Polling) ---
+# Окремий процес, який стежить ТІЛЬКИ за мовою кожні 0.1 сек.
+# Він пише у FIFO лише тоді, коли мова реально змінилася.
 (
     last_key=""
     while :; do
@@ -25,6 +28,8 @@ pkill -f "playerctl status" 2>/dev/null
     done
 ) &
 
+# --- 2. МИТТЄВИЙ ГУЧНОМОВЕЦЬ (Event-based) ---
+# Використовує підписку на події PulseAudio/Pipewire.
 (
     get_vol() {
         if pactl get-sink-mute @DEFAULT_SINK@ | grep -q 'yes'; then
@@ -40,6 +45,8 @@ pkill -f "playerctl status" 2>/dev/null
     done
 ) &
 
+# --- 3. ЕКОНОМНИЙ ТАЙМЕР (Battery & Date) ---
+# Оновлюється раз на хвилину для ThinkPad E14.
 (
     while :; do
         if [ -d /sys/class/power_supply/BAT0 ]; then
@@ -71,12 +78,15 @@ pkill -f "playerctl status" 2>/dev/null
     done
 ) &
 
+# --- 4. ЗБІРКА СТАТУСУ ---
 while read -r line <&3; do
     case "$line" in
         DAT*) date="${line#???}" ;;
         VOL*) volume="${line#???}" ;;
         BAT*) battery="${line#???}" ;;
         KEY*) key="${line#???}" ;;
+        MUS*) music="${line#???}" ;;
     esac
-    xsetroot -name "| $key | $volume | $battery | $date "
+    # Пишемо результат у файл для OXWM
+    echo " $music | $key | $volume | $battery | $date " > /tmp/oxwm_status
 done
